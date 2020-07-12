@@ -3,20 +3,29 @@ const myQuestions = [
   {
     question: "What does cybersecurity protect?",
     answers: {
-      a: "Information systems, programs, and data ",
+      a: " Information systems, programs, and data ",
       b: " Houses and neighborhoods ",
-      c: " Jobs"
+      c: " Jobs "
     },
-    correctAnswer: "a"
+    correctAnswer: " Information systems, programs, and data "
   },
   {
     question: "What does a hacker use to gain access to a system?",
     answers: {
-      a: "Paper and pencil ",
+      a: " Paper and pencil ",
       b: " Computer ",
-      c: " Hammer"
+      c: " Hammer "
     },
-    correctAnswer: "b"
+    correctAnswer: " Computer "
+  },
+  {
+    question: "What is the relationship between a vulnerability and an exploit?",
+    answers: {
+      a: " An exploit is needed for a vulnerability to succeed ",
+      b: " A vulnerability enables hackers to utilize an exploit ",
+      c: " Hackers can use an exploit even without a vulnerability in a system "
+    },
+    correctAnswer: " A vulnerability enables hackers to utilize an exploit "
   },
 ];
 
@@ -50,8 +59,8 @@ function createQuiz() {
       // add this question and its answers to the output
       output.push (
 	  
-        `<div class="question"> ${currentQuestion.question} </div>
-        <div class="answers"> ${answers.join(' ')} </div>`
+        `<div class="question"> <b> ${currentQuestion.question} </b> </div>
+        <div class="answers"> ${answers.join('<br> ')}  </div>`
 		
       );
     }
@@ -73,12 +82,12 @@ function showAnswers() {
   myQuestions.forEach ( (currentQuestion, questionNumber) => {
 
     // find selected answer
-    const answerContainer = answerContainers[questionNumber];	
+    const answerContainer = answerContainers[questionNumber];
     const selector = `input[name=question${questionNumber}]:checked`;
     const userAnswer = (answerContainer.querySelector(selector) || {}).value;
-
+	
     // if answer is correct
-    if (userAnswer === currentQuestion.correctAnswer) {
+    if (currentQuestion.answers[userAnswer] === currentQuestion.correctAnswer) {
       // add to the number of correct answers
       numCorrect++;
 
